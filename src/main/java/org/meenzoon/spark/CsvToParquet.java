@@ -15,7 +15,10 @@ public class CsvToParquet {
         .getOrCreate();
 
     Dataset<Row> df = spark.read().csv("file.csv").toDF();
-    df.filter(col("g").gt(37.5)).write().parquet("file.parquet");
+    df
+      .filter(col("_c6").cast("float").gt(37.5))
+      .write()
+      .parquet("file.parquet");
 
     spark.stop();
   }
