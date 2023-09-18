@@ -5,7 +5,7 @@ import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import static org.apache.spark.sql.functions.col;
 
-public class CsvToParquet {
+public class CsvToParquetJ {
   public static void main(String[] args) {
     SparkSession spark = SparkSession
         .builder()
@@ -14,8 +14,10 @@ public class CsvToParquet {
         .config("spark.driver.bindAddress", "127.0.0.1")
         .getOrCreate();
 
-    Dataset<Row> df = spark.read().csv("file.csv").toDF();
-    df.filter(col("g").gt(37.5)).write().parquet("file.parquet");
+    String path = "~/workspace/data/";
+
+    Dataset<Row> df = spark.read().csv(path + "/file.csv").toDF();
+    df.filter(col("_c8").gt(37.5)).write().parquet(path + "/file.parquet");
 
     spark.stop();
   }
