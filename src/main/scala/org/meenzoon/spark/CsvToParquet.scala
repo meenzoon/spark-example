@@ -14,8 +14,14 @@ object CsvToParquet {
 
     val path = "~/workspace/data"
 
-    val df = spark.read.csv(path + "/file.csv").toDF
+    val df = spark.read
+      .option("delimeter", ",")
+      .option("header", "true")
+      .csv(path + "/file.csv").toDF
+
     val df2 = df.filter(col("_c8").gt(37.5))
+
+    // output 데이터 작성
     df2.write.parquet(path + "/output")
   }
 
