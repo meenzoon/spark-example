@@ -25,3 +25,9 @@ sbin/start-master.sh
 sbin/start-worker.sh
 
 ```
+
+# 사용 데이터   
+## 1. 뉴욕 yellow taxi   
+https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page
+
+## 2. 
