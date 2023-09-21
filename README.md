@@ -1,3 +1,12 @@
+# sbt 빌드 시
+```
+# maven scope를 compile로 해도 jar를 정상 로드하지 못 함
+sbt package
+
+# maven scope compile인 라이브러리를 로드하기 위해서는 아래로 빌드하여야 함
+sbt assembly
+```
+
 # Spark StandAlone Mode 구축 방법
 
 spark download file 불러옴
