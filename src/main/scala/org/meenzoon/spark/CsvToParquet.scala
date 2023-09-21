@@ -13,7 +13,7 @@ object CsvToParquet {
       .config("spark.driver.bindAddress", "127.0.0.1")
       .getOrCreate()
 
-    import spark.implicits._
+    // import spark.implicits._
     val path = "/Users/meenzoon/workspace/data"
 
     val df = spark.read
