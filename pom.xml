@@ -8,22 +8,24 @@
   <version>1.0.0</version>
 
   <properties>
-    <scala.version>3.2.1</scala.version>
-    <hadoop.version>3.1.1</hadoop.version>
     <jdk.version>1.8</jdk.version>
+    <scala.major.version>2.12</scala.major.version>
+    <spark.version>3.2.1</spark.version>
+    <hadoop.version>3.1.1</hadoop.version>
+    <sedona.version>1.4.1</sedona.version>
   </properties>
 
   <dependencies>
     <!-- spark start -->
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-core_2.12</artifactId>
-      <version>${scala.version}</version>
+      <artifactId>spark-core_${scala.major.version}</artifactId>
+      <version>${spark.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
-      <artifactId>spark-sql_2.12</artifactId>
-      <version>${scala.version}</version>
+      <artifactId>spark-sql_${scala.major.version}</artifactId>
+      <version>${spark.version}</version>
     </dependency>
     <!-- spark end -->
 
@@ -46,6 +48,28 @@
       <groupId>org.scala-lang</groupId>
       <artifactId>scala-library</artifactId>
       <version>2.12.15</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.locationtech.jts</groupId>
+      <artifactId>jts-core</artifactId>
+      <version>1.18.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.sedona</groupId>
+      <artifactId>sedona-spark-shaded-3.0_${scala.major.version}</artifactId>
+      <version>${sedona.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.sedona</groupId>
+      <artifactId>sedona-viz-3.0_${scala.major.version}</artifactId>
+      <version>${sedona.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.datasyslab</groupId>
+      <artifactId>geotools-wrapper</artifactId>
+      <version>1.4.0-28.2</version>
     </dependency>
   </dependencies>
 
