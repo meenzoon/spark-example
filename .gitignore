@@ -3,9 +3,6 @@ target
 bin
 out
 
-# sbt
-project
-
 # intellij
 .idea
 *.iml

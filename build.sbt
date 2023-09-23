@@ -16,3 +16,13 @@ libraryDependencies += "org.locationtech.jts" % "jts-core" % "1.18.2"
 libraryDependencies += "org.apache.sedona" %% "sedona-spark-shaded-3.0" % SedonaVersion % dependencyScope
 libraryDependencies += "org.apache.sedona" %% "sedona-viz-3.0" % SedonaVersion % dependencyScope
 libraryDependencies += "org.datasyslab" % "geotools-wrapper" % "1.4.0-28.2" % dependencyScope
+
+assemblyMergeStrategy in assembly := {
+  case PathList("org.apache.sedona", "sedona-core", xs@_*) => MergeStrategy.first
+  case PathList("META-INF", "MANIFEST.MF") => MergeStrategy.discard
+  case PathList("META-INF","services",xs @ _*) => MergeStrategy.filterDistinctLines
+  case path if path.endsWith(".SF") => MergeStrategy.discard
+  case path if path.endsWith(".DSA") => MergeStrategy.discard
+  case path if path.endsWith(".RSA") => MergeStrategy.discard
+  case _ => MergeStrategy.first
+}
