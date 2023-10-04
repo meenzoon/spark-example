@@ -2,29 +2,24 @@ package org.meenzoon.spark
 
 import org.apache.sedona.core.formatMapper.shapefileParser.ShapefileReader
 import org.apache.sedona.core.spatialRDD.SpatialRDD
-import org.apache.sedona.core.utils.SedonaConf
-import org.apache.sedona.sql.utils.{Adapter, SedonaSQLRegistrator}
+import org.apache.sedona.spark.SedonaContext
+import org.apache.sedona.sql.utils.Adapter
 import org.apache.sedona.viz.core.Serde.SedonaVizKryoRegistrator
 import org.apache.sedona.viz.sql.utils.SedonaVizRegistrator
 import org.apache.spark.serializer.KryoSerializer
-import org.apache.spark.sql.SparkSession
-import org.locationtech.jts.geom.{Coordinate, Geometry, GeometryFactory}
+import org.locationtech.jts.geom.Geometry
 
 object SedonaExample {
   def main(args: Array[String]): Unit = {
-    val spark = SparkSession
-      .builder()
+    val config = SedonaContext.builder()
       .appName("Scala Spark SQL")
       .master("local")
       .config("spark.driver.bindAddress", "127.0.0.1")
-      .config("spark.serializer", classOf[KryoSerializer].getName)
       .config("spark.kryo.registrator", classOf[SedonaVizKryoRegistrator].getName)
       .getOrCreate()
-
-    SedonaSQLRegistrator.registerAll(spark)
+    val spark = SedonaContext.create(config)
     SedonaVizRegistrator.registerAll(spark)
 
-    //val resourceFolder = System.getProperty("user.dir") + "/src/test/resources/"
     val resourceFolder = "src/test/resources/"
 
     val csvPolygonInputLocation = resourceFolder + "testenvelope.csv"
@@ -42,8 +37,13 @@ object SedonaExample {
         | FROM rawSpatialDf
                                          """.stripMargin)
     spatialDf.show()
+    println("spatialDF count: " + spatialDf.count())
     spatialDf.printSchema()
 
+    spatialDf.write
+      .mode("overwrite")
+      .format("geoparquet")
+      .save("/Users/meenzoon/workspace/data/geoparquet")
   }
 }
 
