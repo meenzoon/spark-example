@@ -1,0 +1,9 @@
+{
+	type: "Feature",
+	geometry: {
+		type: "Point", coordinates: [127.75423, 34.75295]
+	},
+	properties: {
+		name: "point1"
+	}
+}
