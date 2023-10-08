@@ -28,13 +28,22 @@ object NodeLink {
     rawSpatialDf.createOrReplaceTempView("NODE_LINK_DF")
     val nodelinkDf = spark.sql(
       """
-        | SELECT *
+        | SELECT
+        |   LINK_ID,
+        |   ST_Transform(geometry, "epsg:4326", "epsg:3857") AS geom
         | FROM NODE_LINK_DF
-        | WHERE ST_Distance(ST_POINT(128.5283423, 35.8272649), geometry) > 0.01
                                          """.stripMargin)
+    /*
+    val nodelinkDf = spark.sql(
+      """
+        | SELECT ST_Distance(
+        |   ST_POINT(35.82, 128.5283423),
+        |   ST_POINT(35.83, 128.5283423)
+        |)
+                                         """.stripMargin)
+     */
     nodelinkDf.show()
     println("spatialDF count: " + nodelinkDf.count())
     nodelinkDf.printSchema()
   }
 }
-
