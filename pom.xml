@@ -30,6 +30,12 @@
       <version>${spark.version}</version>
       <scope>${dependency.scope}</scope>
     </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-mllib_${scala.major.version}</artifactId>
+      <version>${spark.version}</version>
+      <scope>${dependency.scope}</scope>
+    </dependency>
     <!-- spark end -->
 
     <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-client -->
