@@ -7,6 +7,18 @@ sbt package
 sbt assembly
 ```
 
+
+# sbt 빌드 및 실행 방법
+```
+# 빌드
+sbt clean package
+
+# Spark 실행
+${SPARK_HOME}/bin/spark-submit \
+--class {클래스 정보} \
+target/scala-2.12/scala-spark_2.12-1.0.jar 
+```
+
 # Spark StandAlone Mode 구축 방법
 
 spark download file 불러옴
